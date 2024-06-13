@@ -13,7 +13,7 @@ export default defineConfig({
     presetIcons({})],
   cli: {
     entry: {
-      patterns: ["./src/**/*.{html,js,ts,jsx,tsx,vue,svelte,astro}", "./templates/**/*.html", "./templates/*.html"],
+      patterns: ["./src/**/*.{html,js,ts,jsx,tsx,vue,svelte,astro}", "./templates/**/*.html"],
       outFile: './tmp/styles/uno.css'
     }
   }
