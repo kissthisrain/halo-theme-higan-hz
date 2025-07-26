@@ -1,9 +1,9 @@
-module.exports = {
+export default {
   plugins: {
     "tailwindcss/nesting": "postcss-nesting",
     tailwindcss: {},
     "postcss-preset-env": {},
-    ...(process.env.NODE_ENV == 777 ? { cssnano: { preset: "default" } } : {}),
+    cssnano: { preset: "default" },
   },
 };
 

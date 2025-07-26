@@ -15,8 +15,4 @@ module.exports = {
       base: ["1rem", "1.75rem"],
     },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: [],
-  },
 };
