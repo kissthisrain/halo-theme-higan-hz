@@ -11,9 +11,9 @@ import headInject from "./plugins/vite-plugin-head-inject";
 export default defineConfig({
   base: "/themes/howiehz-higan/",
   plugins: [
-    PurgeIcons({
-      content: ["./templates/*.html"],
-    }),
+    // PurgeIcons({
+    //   content: ["./src/templates/**/*.html"],
+    // }),
     legacy(),
     headInject({
       // 在 <head> 标签前插入
@@ -42,6 +42,7 @@ export default defineConfig({
         category: path.resolve(__dirname, "src/templates/category.html"),
         index: path.resolve(__dirname, "src/templates/index.html"),
         links: path.resolve(__dirname, "src/templates/links.html"),
+        friends: path.resolve(__dirname, "src/templates/friends.html"),
         moment: path.resolve(__dirname, "src/templates/moment.html"),
         moments: path.resolve(__dirname, "src/templates/moments.html"),
         page: path.resolve(__dirname, "src/templates/page.html"),

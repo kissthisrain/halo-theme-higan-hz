@@ -1,0 +1,26 @@
+<!doctype html>
+<th:block
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: html(
+    title = #{page.friends.page-title}, 
+    head = ~{::headContent},
+    content = ~{::content}, 
+    header = ~{fragments/header::content}, 
+    navbar = ~{}
+  )}"
+>
+  <head>
+    <script src="/src/pages/page_friends.ts" type="module"></script>
+  </head>
+  <th:block th:fragment="content">
+    <!-- 使用 Finder API 获取朋友圈数据，支持分页 -->
+    <th:block
+      th:with="pageParam=${param.page != null ? param.page : 1}, sizeParam=${param.size != null ? param.size : 10}"
+    >
+      <th:block
+        th:insert="~{fragments/friends :: friends-page-content(friends=${friendFinder != null ? friendFinder.list(pageParam, sizeParam) : null})}"
+      >
+      </th:block>
+    </th:block>
+  </th:block>
+</th:block>

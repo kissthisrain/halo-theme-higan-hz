@@ -1,0 +1,340 @@
+/* 朋友圈组件样式 */
+
+/* 简单列表样式 */
+.friends-simple-list {
+  margin: 2rem 0;
+
+  & h3 {
+    color: var(--color-accent-1);
+    font-size: var(--text-h3);
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 0.9rem;
+  }
+
+  & .friends-posts {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .friend-post-simple {
+    border-bottom: 1px solid var(--color-divide);
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    transition: all 0.2s ease;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    &:hover {
+      background: var(--color-card-hover);
+      border-radius: 0.375rem;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  & .friend-header {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.5rem;
+  }
+
+  & .friend-avatar-small {
+    border: 1px solid var(--color-accent-3);
+    border-radius: 50%;
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  & .friend-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  & .friend-author {
+    color: var(--color-accent-1);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      background-image: linear-gradient(
+        transparent,
+        transparent 0.3125rem,
+        var(--color-accent-1) 0.3125rem,
+        var(--color-accent-1)
+      );
+      background-position: bottom;
+      background-repeat: repeat-x;
+      background-size: 100% 0.375rem;
+      color: var(--color-accent-1);
+    }
+  }
+
+  & .friend-time {
+    color: var(--color-time);
+    font-size: var(--text-xs);
+  }
+
+  & .friend-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  & .friend-title-link {
+    background-image: linear-gradient(
+      transparent,
+      transparent 0.3125rem,
+      var(--color-text) 0.3125rem,
+      var(--color-text)
+    );
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 0.375rem;
+    color: var(--color-text);
+    display: block;
+    font-size: var(--text-sm);
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      background-image: linear-gradient(
+        transparent,
+        transparent 0.25rem,
+        var(--color-link-hover) 0.25rem,
+        var(--color-link-hover)
+      );
+      color: var(--color-link-hover);
+    }
+  }
+
+  & .friends-more {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  & .friends-more-link {
+    background-image: linear-gradient(
+      transparent,
+      transparent 0.3125rem,
+      var(--color-accent-1) 0.3125rem,
+      var(--color-accent-1)
+    );
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 0.375rem;
+    color: var(--color-accent-1);
+    font-size: var(--text-sm);
+    text-decoration: none;
+
+    &:hover {
+      background-image: linear-gradient(
+        transparent,
+        transparent 0.25rem,
+        var(--color-link-hover) 0.25rem,
+        var(--color-link-hover)
+      );
+      color: var(--color-link-hover);
+    }
+  }
+}
+
+/* 卡片列表样式 */
+.friends-card-list {
+  margin: 2rem 0;
+
+  & h3 {
+    color: var(--color-accent-1);
+    font-size: var(--text-h3);
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-top: 0.9rem;
+  }
+
+  & .friends-posts {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  & .friend-post-card {
+    border: 1px solid var(--color-divide);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-card-hover);
+      border-color: var(--color-accent-3);
+    }
+  }
+
+  & .friend-header {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  & .friend-avatar {
+    border: 1px solid var(--color-accent-3);
+    border-radius: 50%;
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+
+  & .friend-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  & .friend-author {
+    color: var(--color-accent-1);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      background-image: linear-gradient(
+        transparent,
+        transparent 0.3125rem,
+        var(--color-accent-1) 0.3125rem,
+        var(--color-accent-1)
+      );
+      background-position: bottom;
+      background-repeat: repeat-x;
+      background-size: 100% 0.375rem;
+      color: var(--color-accent-1);
+    }
+  }
+
+  & .friend-time {
+    color: var(--color-time);
+    display: block;
+    font-size: var(--text-xs);
+    margin-top: 0.25rem;
+  }
+
+  & .friend-content {
+    & .friend-title {
+      margin: 0 0 0.5rem 0;
+
+      & a {
+        background-image: linear-gradient(
+          transparent,
+          transparent 0.3125rem,
+          var(--color-text) 0.3125rem,
+          var(--color-text)
+        );
+        background-position: bottom;
+        background-repeat: repeat-x;
+        background-size: 100% 0.375rem;
+        color: var(--color-text);
+        font-size: var(--text);
+        text-decoration: none;
+
+        &:hover {
+          background-image: linear-gradient(
+            transparent,
+            transparent 0.25rem,
+            var(--color-link-hover) 0.25rem,
+            var(--color-link-hover)
+          );
+          color: var(--color-link-hover);
+        }
+      }
+    }
+
+    & .friend-description {
+      color: var(--color-footer-mobile-1);
+      font-size: var(--text-sm);
+      line-height: 1.725;
+      margin: 0;
+    }
+  }
+
+  & .friends-more {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  & .friends-more-link {
+    background-image: linear-gradient(
+      transparent,
+      transparent 0.3125rem,
+      var(--color-accent-1) 0.3125rem,
+      var(--color-accent-1)
+    );
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 100% 0.375rem;
+    border: 1px solid var(--color-accent-1);
+    border-radius: 0.375rem;
+    color: var(--color-accent-1);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-image: linear-gradient(
+        transparent,
+        transparent 0.25rem,
+        var(--color-link-hover) 0.25rem,
+        var(--color-link-hover)
+      );
+      border-color: var(--color-link-hover);
+      color: var(--color-link-hover);
+    }
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .friends-simple-list .friend-post-simple {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .friends-simple-list .friend-header {
+    width: 100%;
+  }
+
+  .friends-simple-list .friend-content {
+    width: 100%;
+  }
+
+  .friends-simple-list .friend-title-link {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+
+  #friends .friend-post:hover {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}

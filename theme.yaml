@@ -21,3 +21,9 @@ spec:
   license:
     - name: "MIT"
       url: "https://github.com/howiehz/halo-theme-higan-hz/blob/main/LICENSE"
+  customTemplates:
+    page:
+      - name: 朋友圈
+        description: 展示朋友们的最新文章动态，支持分页浏览
+        screenshot:
+        file: friends.html

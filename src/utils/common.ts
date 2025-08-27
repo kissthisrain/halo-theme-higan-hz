@@ -1,4 +1,4 @@
-import "@purge-icons/generated";
+import "@iconify/iconify";
 import "../../tmp/styles/theme.css";
 import "../styles/main.css";
 import "../styles/tailwind.css";
