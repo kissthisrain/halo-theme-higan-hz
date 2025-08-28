@@ -1,112 +1,124 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Friends Fragment</title>
-</head>
-
-<body>
-  <!-- 朋友圈页面主要内容 -->
-  <th:block th:fragment="friends-page-content(friends)">
-    <article id="friends" class="post" itemscope itemtype="http://schema.org/BlogPosting">
-      <header>
-        <h1 th:text="#{page.friends.title}">朋友圈</h1>
-      </header>
-      <div class="content flex-auto">
-
-        <!-- 检查朋友圈插件是否可用 -->
-        <th:block th:if="${pluginFinder != null and pluginFinder.available('plugin-friends')}">
-          <!-- 检查是否有朋友圈数据 -->
-          <th:block th:if="${friends != null}">
-            <!-- 朋友圈文章列表 -->
-            <div class="friends-posts" th:if="${not #lists.isEmpty(friends.items)}">
-              <article th:each="friend : ${friends.items}" th:with="spec = ${friend.spec}" class="friend-post">
-                <header class="friend-header">
-                  <img th:src="${spec.logo}" alt="avatar" class="friend-avatar" loading="lazy">
-                  <div class="friend-info">
-                    <a th:href="${spec.authorUrl}" target="_blank" class="friend-author" th:text="${spec.author}"></a>
-                    <time th:datetime="${spec.pubDate}" th:text="${#temporals.format(spec.pubDate, 'yyyy-MM-dd HH:mm')}"
-                      class="friend-time"></time>
-                  </div>
-                </header>
-                <div class="friend-content">
+<th:block th:fragment="friends-page-content(friends)">
+  <article id="friends" class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <!-- <header>
+      <h1 th:text="#{page.friends.title}">朋友圈</h1>
+    </header> -->
+    <div class="content flex-auto">
+      <!-- 检查朋友圈插件是否可用 -->
+      <th:block th:if="${pluginFinder != null and pluginFinder.available('plugin-friends')}">
+        <!-- 检查是否有朋友圈数据 -->
+        <th:block th:if="${friends != null}">
+          <!-- 朋友圈文章列表 -->
+          <div class="friends-posts" th:if="${not #lists.isEmpty(friends.items)}">
+            <div class="friend-post-card" th:each="friend, iterStat : ${friends.items}" th:with="spec = ${friend.spec}">
+              <article class="friend-post">
+                <!-- 标题在第一行 -->
+                <div class="friend-title-section">
                   <h3 class="friend-title">
                     <a th:href="${spec.postLink}" target="_blank" th:text="${spec.title}"></a>
                   </h3>
+                </div>
+
+                <!-- 正文内容 -->
+                <div class="friend-content">
                   <p th:if="${not #strings.isEmpty(spec.description)}" th:text="${spec.description}"
                     class="friend-description"></p>
+
+
                 </div>
+                <!-- 头像、作者名称、发布时间 -->
+                <p class="friend-footer">
+                  <img th:src="${spec.logo}" alt="avatar" class="friend-avatar">
+                  <a th:href="${spec.authorUrl}" target="_blank" class="friend-author" th:text="${spec.author}"></a>
+                  <time th:datetime="${spec.pubDate}" class="friend-time" th:attr="data-time=${spec.pubDate}"></time>
+                </p>
+              </br>
+
               </article>
             </div>
+          </div>
 
-            <!-- 分页导航 -->
-            <div class="pagination" th:if="${friends.totalPages > 1}">
-              <a th:href="@{${singlePage.status.permalink}(page=${friends.page - 1})}" th:if="${friends.hasPrevious}"
-                th:aria-label="#{common.previousPage.aria-label}">
-                <i class="iconify iconify-middle" data-icon="material-symbols:chevron-left"></i>
-              </a>
-              <span class="page-number" th:with="totalPage=${friends.totalPages}"
-                th:text="#{common.page-number.text(${friends.page}, ${totalPage})}"
-                th:if="${friends.totalPages > 1 and theme.config?.styles?.is_show_page_number}">Page 1 of 1
-                填充位</span>
-              <a th:href="@{${singlePage.status.permalink}(page=${friends.page + 1})}" th:if="${friends.hasNext}"
-                th:aria-label="#{common.nextPage.aria-label}">
-                <i class="iconify iconify-middle" data-icon="material-symbols:chevron-right"></i>
-              </a>
-            </div>
+          <!-- 相对时间处理脚本 -->
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              function formatRelativeTime(date) {
+                const now = new Date();
+                const diffMs = now - date;
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-            <!-- 空状态 -->
-            <div th:if="${#lists.isEmpty(friends.items)}" class="empty-state">
-              <p th:text="#{page.friends.empty}">暂无朋友圈动态</p>
-            </div>
-          </th:block>
+                if (diffHours < 24) {
+                  return diffHours <= 0 ? '· 刚刚' : `· ${diffHours}小时前`;
+                } else {
+                  return `· ${diffDays}天前`;
+                }
+              }
 
-          <!-- 朋友圈数据不可用 -->
-          <div th:unless="${friends != null}" class="empty-state">
-            <div class="friends-error-card">
-              <h3>朋友圈数据不可用</h3>
-              <p class="error-description">
-                朋友圈插件已启用，但无法获取数据
-              </p>
-              <div class="error-details">
-                <p>可能的原因：</p>
-                <ul>
-                  <li>朋友圈插件未正确配置数据源</li>
-                  <li>没有添加任何朋友的博客链接</li>
-                  <li>RSS 数据获取失败</li>
-                  <li>需要等待数据同步完成</li>
-                </ul>
-              </div>
-            </div>
+              // 处理所有时间元素
+              document.querySelectorAll('.friend-time[data-time]').forEach(function (timeElement) {
+                const dateStr = timeElement.getAttribute('data-time');
+                const date = new Date(dateStr);
+                timeElement.textContent = formatRelativeTime(date);
+              });
+            });
+          </script>
+
+          <!-- 分页导航 -->
+          <div class="pagination" th:if="${friends.totalPages > 1}">
+            <a th:href="@{${singlePage.status.permalink}(page=${friends.page - 1})}" th:if="${friends.hasPrevious}"
+              th:aria-label="#{common.previousPage.aria-label}">
+              <i class="iconify iconify-middle" data-icon="material-symbols:chevron-left"></i>
+            </a>
+            <span class="page-number" th:with="totalPage=${friends.totalPages}"
+              th:text="#{common.page-number.text(${friends.page}, ${totalPage})}"
+              th:if="${friends.totalPages > 1 and theme.config?.styles?.is_show_page_number}">Page 1 of 1 填充位</span>
+            <a th:href="@{${singlePage.status.permalink}(page=${friends.page + 1})}" th:if="${friends.hasNext}"
+              th:aria-label="#{common.nextPage.aria-label}">
+              <i class="iconify iconify-middle" data-icon="material-symbols:chevron-right"></i>
+            </a>
+          </div>
+
+          <!-- 空状态 -->
+          <div th:if="${#lists.isEmpty(friends.items)}" class="empty-state">
+            <p th:text="#{page.friends.empty}">暂无朋友圈动态</p>
           </div>
         </th:block>
 
-        <!-- 插件未安装或未配置提示 -->
-        <div th:unless="${pluginFinder != null and pluginFinder.available('plugin-friends')}" class="empty-state">
+        <!-- 朋友圈数据不可用 -->
+        <div th:unless="${friends != null}" class="empty-state">
           <div class="friends-error-card">
-            <h3>朋友圈功能不可用</h3>
-            <p class="error-description">
-              朋友圈插件未安装、未启用或未正确配置
-            </p>
+            <h3>朋友圈数据不可用</h3>
+            <p class="error-description">朋友圈插件已启用，但无法获取数据</p>
             <div class="error-details">
-              <p>解决步骤：</p>
-              <ol>
-                <li>进入 Halo 后台管理界面</li>
-                <li>访问"插件管理"页面</li>
-                <li>搜索并安装"朋友圈"插件（plugin-friends）</li>
-                <li>启用插件并配置朋友圈数据源</li>
-                <li>确保插件版本与 Halo 版本兼容</li>
-              </ol>
+              <p>可能的原因：</p>
+              <ul>
+                <li>朋友圈插件未正确配置数据源</li>
+                <li>没有添加任何朋友的博客链接</li>
+                <li>RSS 数据获取失败</li>
+                <li>需要等待数据同步完成</li>
+              </ul>
             </div>
           </div>
         </div>
+      </th:block>
 
+      <!-- 插件未安装或未配置提示 -->
+      <div th:unless="${pluginFinder != null and pluginFinder.available('plugin-friends')}" class="empty-state">
+        <div class="friends-error-card">
+          <h3>朋友圈功能不可用</h3>
+          <p class="error-description">朋友圈插件未安装、未启用或未正确配置</p>
+          <div class="error-details">
+            <p>解决步骤：</p>
+            <ol>
+              <li>进入 Halo 后台管理界面</li>
+              <li>访问"插件管理"页面</li>
+              <li>搜索并安装"朋友圈"插件（plugin-friends）</li>
+              <li>启用插件并配置朋友圈数据源</li>
+              <li>确保插件版本与 Halo 版本兼容</li>
+            </ol>
+          </div>
+        </div>
       </div>
-    </article>
-  </th:block>
-
-
-</body>
-
-</html>
+    </div>
+  </article>
+</th:block>

@@ -18,8 +18,9 @@
 
   & .friend-post {
     border-bottom: 1px solid var(--color-divide);
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
     padding-bottom: 1.5rem;
+    text-align: left;
     transition: all 0.2s ease;
 
     &:last-child {
@@ -58,21 +59,12 @@
   }
 
   & .friend-author {
-    color: var(--color-accent-1);
-    font-size: var(--text-sm);
-    font-weight: 500;
+    color: var(--color-time);
+    font-size: var(--text-xs);
+    font-weight: 400;
     text-decoration: none;
 
     &:hover {
-      background-image: linear-gradient(
-        transparent,
-        transparent 0.3125rem,
-        var(--color-accent-1) 0.3125rem,
-        var(--color-accent-1)
-      );
-      background-position: bottom;
-      background-repeat: repeat-x;
-      background-size: 100% 0.375rem;
       color: var(--color-accent-1);
     }
   }
@@ -84,42 +76,68 @@
     margin-top: 0.125rem;
   }
 
-  & .friend-content {
+  & .friend-title-section {
+    margin-bottom: 0.75rem;
+
     & .friend-title {
-      margin: 0 0 0.5rem 0;
+      margin: 0;
 
       & a {
-        background-image: linear-gradient(
-          transparent,
-          transparent 0.3125rem,
-          var(--color-text) 0.3125rem,
-          var(--color-text)
-        );
-        background-position: bottom;
-        background-repeat: repeat-x;
-        background-size: 100% 0.375rem;
-        color: var(--color-text);
-        font-size: var(--text);
-        font-weight: normal;
+        color: var(--color-accent-1);
+        font-size: var(--text-lg);
+        font-weight: 600;
         text-decoration: none;
+        line-height: 1.4;
 
         &:hover {
-          background-image: linear-gradient(
-            transparent,
-            transparent 0.25rem,
-            var(--color-link-hover) 0.25rem,
-            var(--color-link-hover)
-          );
           color: var(--color-link-hover);
         }
       }
     }
+  }
+
+  & .friend-content {
+    margin-bottom: 0.75rem;
 
     & .friend-description {
       color: var(--color-footer-mobile-1);
       font-size: var(--text-sm);
       line-height: 1.725;
       margin: 0;
+    }
+  }
+
+  & .friend-footer {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    text-align: left;
+    margin-right: auto;
+
+    & .friend-avatar {
+      border: 1px solid var(--color-accent-3);
+      border-radius: 50%;
+      height: 1.6rem;
+      margin-right: 0.75rem;
+      width: 1.6rem;
+    }
+
+    & .friend-author {
+      color: var(--color-time);
+      font-size: var(--text-xs);
+      font-weight: 400;
+      margin-right: 0.75rem;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-accent-1);
+      }
+    }
+
+    & .friend-time {
+      color: var(--color-time);
+      font-size: var(--text-xs);
     }
   }
 
@@ -185,10 +203,11 @@
 /* 朋友圈组件样式 */
 .friends-simple-list,
 .friends-card-list {
+
   & .friend-post-simple,
   & .friend-post-card {
     border-bottom: 1px solid var(--color-divide);
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     padding-bottom: 1rem;
     transition: all 0.2s ease;
 
@@ -236,21 +255,12 @@
   }
 
   & .friend-author {
-    color: var(--color-accent-1);
-    font-size: var(--text-sm);
-    font-weight: 500;
+    color: var(--color-time);
+    font-size: var(--text-xs);
+    font-weight: 400;
     text-decoration: none;
 
     &:hover {
-      background-image: linear-gradient(
-        transparent,
-        transparent 0.3125rem,
-        var(--color-accent-1) 0.3125rem,
-        var(--color-accent-1)
-      );
-      background-position: bottom;
-      background-repeat: repeat-x;
-      background-size: 100% 0.375rem;
       color: var(--color-accent-1);
     }
   }
@@ -262,25 +272,10 @@
   }
 
   & .friend-title-link {
-    background-image: linear-gradient(
-      transparent,
-      transparent 0.3125rem,
-      var(--color-text) 0.3125rem,
-      var(--color-text)
-    );
-    background-position: bottom;
-    background-repeat: repeat-x;
-    background-size: 100% 0.375rem;
     color: var(--color-text);
     text-decoration: none;
 
     &:hover {
-      background-image: linear-gradient(
-        transparent,
-        transparent 0.25rem,
-        var(--color-link-hover) 0.25rem,
-        var(--color-link-hover)
-      );
       color: var(--color-link-hover);
     }
   }
@@ -289,25 +284,13 @@
     margin: 0 0 0.5rem 0;
 
     & a {
-      background-image: linear-gradient(
-        transparent,
-        transparent 0.3125rem,
-        var(--color-text) 0.3125rem,
-        var(--color-text)
-      );
-      background-position: bottom;
-      background-repeat: repeat-x;
-      background-size: 100% 0.375rem;
-      color: var(--color-text);
+      color: var(--color-accent-1);
+      font-size: var(--text-lg);
+      font-weight: 600;
       text-decoration: none;
+      line-height: 1.4;
 
       &:hover {
-        background-image: linear-gradient(
-          transparent,
-          transparent 0.25rem,
-          var(--color-link-hover) 0.25rem,
-          var(--color-link-hover)
-        );
         color: var(--color-link-hover);
       }
     }
@@ -325,25 +308,10 @@
     text-align: center;
 
     & .friends-more-link {
-      background-image: linear-gradient(
-        transparent,
-        transparent 0.3125rem,
-        var(--color-accent-1) 0.3125rem,
-        var(--color-accent-1)
-      );
-      background-position: bottom;
-      background-repeat: repeat-x;
-      background-size: 100% 0.375rem;
       color: var(--color-accent-1);
       text-decoration: none;
 
       &:hover {
-        background-image: linear-gradient(
-          transparent,
-          transparent 0.25rem,
-          var(--color-link-hover) 0.25rem,
-          var(--color-link-hover)
-        );
         color: var(--color-link-hover);
       }
     }
