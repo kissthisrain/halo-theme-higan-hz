@@ -17,25 +17,32 @@
       <div class="content">
         <th:block th:each="group : ${groups}" th:if="${not #lists.isEmpty(group.links)}">
           <h3 th:if="${#lists.size(groups) > 1}" th:text="${group.spec.displayName}"></h3>
-          <ul>
-            <li th:each="link : ${group.links}">
-              <a class="fir-image-figure" rel="noopener" target="_blank" th:href="@{${link.spec.url}}">
-                <figure class="fir-imageover">
-                  <img
-                    loading="lazy"
-                    class="fir-author-image fir-clickcircle"
-                    th:src="${link.spec.logo}"
-                    th:alt="${link.spec.displayName}"
-                    th:aria-label="#{page.links.link-logo.aria-label}"
-                  />
-                  <figcaption>
-                    <div class="fig-author-figure-title" th:text="${link.spec.displayName}"></div>
-                    <div class="fig-author-figure-description" th:utext="${link.spec.description}"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </li>
-          </ul>
+          <div class="links-grid">
+            <a
+              class="link-card"
+              rel="noopener"
+              target="_blank"
+              th:href="@{${link.spec.url}}"
+              th:each="link : ${group.links}"
+            >
+              <img
+                loading="lazy"
+                class="link-avatar"
+                th:src="${link.spec.logo}"
+                th:alt="${link.spec.displayName}"
+                th:aria-label="#{page.links.link-logo.aria-label}"
+                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iMjAiIGZpbGw9IiNGM0Y0RjYiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0yMCAyMVYxOUE0IDQgMCAwIDAgMTYgMTVIOEE0IDQgMCAwIDAgNCAyMVYyMSIgc3Ryb2tlPSIjOTlBM0FFIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiIHN0cm9rZT0iIzk5QTNBRSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cjwvc3ZnPgo='; this.onerror=null;"
+              />
+              <div class="link-info">
+                <div class="link-title" th:text="${link.spec.displayName}"></div>
+                <div
+                  class="link-description"
+                  th:title="${link.spec.description}"
+                  th:utext="${link.spec.description}"
+                ></div>
+              </div>
+            </a>
+          </div>
         </th:block>
       </div>
     </article>

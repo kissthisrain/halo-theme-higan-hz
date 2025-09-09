@@ -203,7 +203,6 @@
 /* 朋友圈组件样式 */
 .friends-simple-list,
 .friends-card-list {
-
   & .friend-post-simple,
   & .friend-post-card {
     border-bottom: 1px solid var(--color-divide);
