@@ -1101,6 +1101,18 @@ spec:
           name: is_moment_comment_section_show
           label: 是否启用评论区
           value: true
+        - $formkit: checkbox
+          name: is_twikoo_comment_count_show
+          label: 是否启用 Twikoo 评论数量显示
+          value: false
+          help: 启用后将从 Twikoo 获取评论数量并显示在瞬间列表中，需搭配Twikoo插件使用
+        - $formkit: text
+          name: twikoo_env_id
+          if: "$is_twikoo_comment_count_show === true"
+          label: Twikoo 环境 ID
+          value: ""
+          validation: "required"
+          help: 您的 Twikoo 环境 ID，必填项
     - group: sns
       label: 社交资料/RSS
       formSchema:

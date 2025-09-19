@@ -2,7 +2,7 @@
   <article class="moment" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="content flex-auto">
       <div class="post-list flex-auto">
-        <ul x-data="momentComment">
+        <ul x-data="momentComment" x-init="init()">
           <li th:each="moment : ${moments.items}" class="moment-item" th:id="${moment.metadata.name}">
             <div
               class="moment-header"
@@ -138,7 +138,18 @@
                         />
                       </svg>
                     </span>
-                    <span th:text="${moment.stats.approvedComment}"></span>
+                    <span
+                      th:if="${not theme.config?.moments_styles?.is_twikoo_comment_count_show}"
+                      th:text="${moment.stats.approvedComment}"
+                    >
+                    </span>
+                    <span
+                      th:if="${theme.config?.moments_styles?.is_twikoo_comment_count_show}"
+                      th:data-moment-comment-count="${moment.metadata.name}"
+                      x-text="getCommentCount($el.dataset.momentCommentCount)"
+                    >
+                      0
+                    </span>
                   </a>
                   <div class="moment-comment" x-show="current === name" th:if="${haloCommentEnabled}">
                     <halo:comment group="moment.halo.run" kind="Moment" th:name="${moment.metadata?.name}" />
@@ -217,6 +228,13 @@
           dom.style.fontWeight = "500";
         }
       }
+    </script>
+    <script th:inline="javascript" th:if="${theme.config?.moments_styles?.is_twikoo_comment_count_show}">
+      // Twikoo 配置
+      window.twikooConfig = {
+        enabled: /*[[${theme.config?.moments_styles?.is_twikoo_comment_count_show}]]*/ false,
+        envId: /*[[${theme.config?.moments_styles?.twikoo_env_id}]]*/ "",
+      };
     </script>
   </article>
 </th:block>
